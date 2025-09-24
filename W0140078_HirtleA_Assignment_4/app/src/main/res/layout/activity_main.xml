@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Display at the top -->
+    <TextView
+        android:id="@+id/display"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="#222"
+        android:textColor="#FFF"
+        android:textSize="32sp"
+        android:gravity="end|center_vertical"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Button grid -->
+    <GridLayout
+        android:id="@+id/buttonGrid"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:rowCount="5"
+        android:columnCount="4"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/display"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Row 1 -->
+        <Button android:id="@+id/btn7" android:text="7"/>
+        <Button android:id="@+id/btn8" android:text="8"/>
+        <Button android:id="@+id/btn9" android:text="9"/>
+        <Button android:id="@+id/btnDivide" android:text="/"/>
+
+        <!-- Row 2 -->
+        <Button android:id="@+id/btn4" android:text="4"/>
+        <Button android:id="@+id/btn5" android:text="5"/>
+        <Button android:id="@+id/btn6" android:text="6"/>
+        <Button android:id="@+id/btnMultiply" android:text="*"/>
+
+        <!-- Row 3 -->
+        <Button android:id="@+id/btn1" android:text="1"/>
+        <Button android:id="@+id/btn2" android:text="2"/>
+        <Button android:id="@+id/btn3" android:text="3"/>
+        <Button android:id="@+id/btnSubtract" android:text="-"/>
+
+        <!-- Row 4 -->
+        <Button android:id="@+id/btn0" android:text="0"/>
+        <Button android:id="@+id/btnClear" android:text="C"/>
+        <Button android:id="@+id/btnEquals" android:text="="/>
+        <Button android:id="@+id/btnAdd" android:text="+"/>
+
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

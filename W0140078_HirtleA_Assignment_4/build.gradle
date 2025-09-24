@@ -1,0 +1,14 @@
+// Top-level build file for all modules
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.13.0' // Adjust to your Android Studio version
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

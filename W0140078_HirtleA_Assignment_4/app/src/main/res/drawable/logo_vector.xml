@@ -1,0 +1,21 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="50dp"
+    android:viewportWidth="200"
+    android:viewportHeight="50">
+
+    <!-- Background rectangle (optional) -->
+    <path
+        android:fillColor="#121212"
+        android:pathData="M0,0h200v50h-200z" />
+
+    <!-- Text "Aaron" as a simple neon-style -->
+    <group>
+        <path
+            android:fillColor="#00FFFF"
+            android:pathData="M10,40 L10,10 L20,10 L20,40 Z
+                              M30,40 L30,10 L40,10 L40,40 Z
+                              M50,40 L50,10 L60,10 L60,40 Z" />
+        <!-- You can add more paths to spell your name properly -->
+    </group>
+</vector>
