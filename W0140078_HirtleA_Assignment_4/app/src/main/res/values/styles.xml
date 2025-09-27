@@ -2,5 +2,6 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">#121212</item>
         <item name="android:textColorPrimary">#00FFFF</item>
+        <item name="android:fontFamily">@font/orbitron_variable</item>
     </style>
 </resources>
