@@ -1,16 +1,21 @@
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true">
-        <shape android:shape="rectangle">
-            <solid android:color="@color/accentColor"/>
-            <corners android:radius="12dp"/>
-            <stroke android:width="2dp" android:color="@color/primaryColor"/>
-        </shape>
-    </item>
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorControlHighlight">
+
+    <!-- Button base shape -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/primaryDarkColor"/>
+            <solid android:color="#424242"/> <!-- Base button color -->
             <corners android:radius="12dp"/>
-            <stroke android:width="2dp" android:color="@color/accentColor"/>
+            <stroke android:width="2dp" android:color="#616161"/>
         </shape>
     </item>
-</selector>
+
+    <!-- Mask for ripple overlay (keeps ripple within button shape) -->
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF"/>
+            <corners android:radius="12dp"/>
+        </shape>
+    </item>
+</ripple>

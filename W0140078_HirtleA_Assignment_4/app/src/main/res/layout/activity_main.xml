@@ -23,7 +23,7 @@
         app:layout_constraintHeight_percent="0.15"
         app:layout_constraintDimensionRatio="W,2:1" />
 
-    <!-- Input field for typing numbers -->
+    <!-- Input field -->
     <EditText
         android:id="@+id/inputField"
         android:layout_width="0dp"
@@ -40,7 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Display at the top -->
+    <!-- Display -->
     <TextView
         android:id="@+id/display"
         android:layout_width="0dp"
@@ -70,29 +70,28 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <!-- Row 1 -->
-        <Button android:id="@+id/btn7" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="7" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
-        <Button android:id="@+id/btn8" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="8" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
-        <Button android:id="@+id/btn9" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="9" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
-        <Button android:id="@+id/btnDivide" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="/" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
+        <Button android:id="@+id/btn7" android:text="7" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn8" android:text="8" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn9" android:text="9" style="@style/CalcButton"/>
+        <Button android:id="@+id/btnDivide" android:text="/" style="@style/CalcButton"/>
 
         <!-- Row 2 -->
-        <Button android:id="@+id/btn4" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="4" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
-        <Button android:id="@+id/btn5" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="5" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
-        <Button android:id="@+id/btn6" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="6" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
-        <Button android:id="@+id/btnMultiply" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="*" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
+        <Button android:id="@+id/btn4" android:text="4" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn5" android:text="5" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn6" android:text="6" style="@style/CalcButton"/>
+        <Button android:id="@+id/btnMultiply" android:text="*" style="@style/CalcButton"/>
 
         <!-- Row 3 -->
-        <Button android:id="@+id/btn1" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="1" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
-        <Button android:id="@+id/btn2" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="2" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
-        <Button android:id="@+id/btn3" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="3" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
-        <Button android:id="@+id/btnSubtract" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="-" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
+        <Button android:id="@+id/btn1" android:text="1" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn2" android:text="2" style="@style/CalcButton"/>
+        <Button android:id="@+id/btn3" android:text="3" style="@style/CalcButton"/>
+        <Button android:id="@+id/btnSubtract" android:text="-" style="@style/CalcButton"/>
 
         <!-- Row 4 -->
-        <Button android:id="@+id/btn0" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="0" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
-        <Button android:id="@+id/btnClear" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="C" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
-        <Button android:id="@+id/btnEquals" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="=" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
-        <Button android:id="@+id/btnAdd" android:layout_width="0dp" android:layout_height="0dp" android:layout_rowWeight="1" android:layout_columnWeight="1" android:text="+" android:textColor="@color/buttonTextColor" android:background="@drawable/btn_background" android:fontFamily="@font/orbitron_variable"/>
+        <Button android:id="@+id/btn0" android:text="0" style="@style/CalcButton"/>
+        <Button android:id="@+id/btnClear" android:text="C" style="@style/CalcButton"/>
+        <Button android:id="@+id/btnEquals" android:text="=" style="@style/CalcButton"/>
+        <Button android:id="@+id/btnAdd" android:text="+" style="@style/CalcButton"/>
 
     </GridLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
