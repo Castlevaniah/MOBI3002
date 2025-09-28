@@ -1,16 +1,17 @@
 package com.example.calculator;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView display;
+    private String currentInput = "";
     private double firstNumber = 0;
-    private double secondNumber = 0;
     private String operator = "";
 
     @Override
@@ -21,39 +22,50 @@ public class MainActivity extends AppCompatActivity {
         display = findViewById(R.id.display);
 
         // Number buttons
-        int[] numberIds = {
-                R.id.btn0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4,
-                R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9
-        };
+        int[] numberButtons = {R.id.btn0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4,
+                R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9};
 
-        for (int id : numberIds) {
+        for (int id : numberButtons) {
             Button btn = findViewById(id);
-            btn.setOnClickListener(v -> {
-                display.append(((Button) v).getText());
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Button b = (Button) view;
+                    currentInput += b.getText().toString();
+                    display.setText(currentInput);
+
+                    // Log number pressed
+                    Log.d("CalculatorApp", "Number pressed: " + b.getText().toString() +
+                            " | Current input: " + currentInput);
+                }
             });
         }
 
         // Operator buttons
-        int[] operatorIds = {
-                R.id.btnAdd, R.id.btnSubtract, R.id.btnMultiply, R.id.btnDivide
-        };
-
-        for (int id : operatorIds) {
+        int[] operatorButtons = {R.id.btnAdd, R.id.btnSubtract, R.id.btnMultiply, R.id.btnDivide};
+        for (int id : operatorButtons) {
             Button btn = findViewById(id);
-            btn.setOnClickListener(v -> {
-                if (!display.getText().toString().isEmpty()) {
-                    firstNumber = Double.parseDouble(display.getText().toString());
-                    operator = ((Button) v).getText().toString();
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    firstNumber = Double.parseDouble(currentInput);
+                    operator = ((Button) view).getText().toString();
+                    currentInput = "";
                     display.setText("");
+
+                    // Log operator pressed
+                    Log.d("CalculatorApp", "Operator selected: " + operator +
+                            " | First number: " + firstNumber);
                 }
             });
         }
 
         // Equals button
-        Button equals = findViewById(R.id.btnEquals);
-        equals.setOnClickListener(v -> {
-            if (!display.getText().toString().isEmpty() && !operator.isEmpty()) {
-                secondNumber = Double.parseDouble(display.getText().toString());
+        Button btnEquals = findViewById(R.id.btnEquals);
+        btnEquals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                double secondNumber = Double.parseDouble(currentInput);
                 double result = 0;
 
                 switch (operator) {
@@ -71,24 +83,34 @@ public class MainActivity extends AppCompatActivity {
                             result = firstNumber / secondNumber;
                         } else {
                             display.setText("Error");
+                            Log.e("CalculatorApp", "Division by zero attempted!");
                             return;
                         }
                         break;
                 }
 
                 display.setText(String.valueOf(result));
-                firstNumber = result; // allow chaining calculations
-                operator = "";
+                currentInput = String.valueOf(result);
+
+                // Log calculation
+                Log.i("CalculatorApp", "Calculation performed: " +
+                        firstNumber + " " + operator + " " + secondNumber + " = " + result);
             }
         });
 
         // Clear button
-        Button clear = findViewById(R.id.btnClear);
-        clear.setOnClickListener(v -> {
-            display.setText("");
-            firstNumber = 0;
-            secondNumber = 0;
-            operator = "";
+        Button btnClear = findViewById(R.id.btnClear);
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentInput = "";
+                firstNumber = 0;
+                operator = "";
+                display.setText("");
+
+                // Log clear action
+                Log.w("CalculatorApp", "Calculator cleared");
+            }
         });
     }
 }
