@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Pressed state (pushed in) -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#1E1E1E"
+                android:endColor="#0D0D0D"
+                android:angle="270"/>
+            <corners android:radius="10dp"/>
+            <stroke android:width="2dp" android:color="#222222"/>
+        </shape>
+    </item>
+
+    <!-- Default state (raised look) -->
+    <item>
+        <layer-list>
+            <!-- Shadow -->
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="#66000000"/>
+                    <corners android:radius="10dp"/>
+                </shape>
+            </item>
+            <!-- Button face -->
+            <item android:top="2dp" android:left="2dp">
+                <shape android:shape="rectangle">
+                    <gradient
+                        android:startColor="#2A2A2A"
+                        android:endColor="#1A1A1A"
+                        android:angle="270"/>
+                    <corners android:radius="10dp"/>
+                    <stroke android:width="2dp" android:color="#333333"/>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+</selector>

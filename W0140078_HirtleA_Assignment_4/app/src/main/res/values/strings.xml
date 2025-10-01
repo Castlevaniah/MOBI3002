@@ -2,4 +2,10 @@
     <string name="app_name">Calculator</string>
     <string name="enter_number">Enter number</string>
     <string name="app_logo">App Logo</string>
+
+    <!-- Operator content descriptions -->
+    <string name="plus">Plus</string>
+    <string name="minus">Minus</string>
+    <string name="divide">Divide</string>
+    <string name="multiply">Multiply</string>
 </resources>

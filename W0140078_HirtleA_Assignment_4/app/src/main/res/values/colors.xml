@@ -4,8 +4,9 @@
     <color name="primaryDarkColor">#121212</color>  <!-- Gothic Black -->
     <color name="accentColor">#FF1744</color>       <!-- Neon Red -->
     <color name="backgroundColor">#0D47A1</color>   <!-- Deep Blue -->
-    <color name="buttonTextColor">#FFFFFF</color>   <!-- White for contrast -->
 
+
+    <color name="buttonTextColor">#00BCD4</color> <!-- Cyan -->
 
         <color name="buttonTextColorLight">#000000</color> <!-- Black text for light theme -->
         <color name="buttonTextColorDark">#FFFFFF</color>  <!-- White text for dark theme -->

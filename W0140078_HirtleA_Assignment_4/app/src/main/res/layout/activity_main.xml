@@ -1,97 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
     android:background="@drawable/display_bg"
-    tools:ignore="ExtraText">
+    tools:context=".MainActivity">
 
-    <!-- Logo at the top -->
+    <!-- Logo (smaller so keys get space in landscape) -->
     <ImageView
         android:id="@+id/logoImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
         android:src="@drawable/logo"
         android:contentDescription="@string/app_logo"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintDimensionRatio="W,2:1" />
+        app:layout_constraintHeight_percent="0.10" />
 
-    <!-- Input field -->
+    <!-- Display (read-only) -->
     <EditText
         android:id="@+id/inputField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:hint="Enter number"
-        android:textSize="24sp"
-        android:gravity="end"
+        android:minHeight="56dp"
+        android:gravity="end|center_vertical"
+        android:focusable="false"
+        android:cursorVisible="false"
+        android:longClickable="false"
+        android:inputType="none"
+        android:hint="0"
+        android:textSize="32sp"
         android:background="#22000000"
         android:textColor="@color/buttonTextColor"
         android:fontFamily="@font/orbitron_variable"
         android:padding="10dp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="18sp"
+        android:autoSizeMaxTextSize="48sp"
+        android:autoSizeStepGranularity="2sp"
         app:layout_constraintTop_toBottomOf="@id/logoImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Display -->
-    <TextView
-        android:id="@+id/display"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:background="#33000000"
-        android:textColor="@color/buttonTextColor"
-        android:textSize="32sp"
-        android:gravity="end|center_vertical"
-        android:padding="10dp"
-        android:fontFamily="@font/orbitron_variable"
-        app:layout_constraintTop_toBottomOf="@id/inputField"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Button grid -->
-    <GridLayout
-        android:id="@+id/buttonGrid"
+    <!-- KEYPAD: weighted rows/cols so buttons ALWAYS fill -->
+    <LinearLayout
+        android:id="@+id/keypad"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:rowCount="5"
-        android:columnCount="4"
-        android:layout_marginTop="8dp"
-        android:useDefaultMargins="true"
-        app:layout_constraintTop_toBottomOf="@id/display"
+        android:orientation="vertical"
+        android:layout_margin="6dp"
+        android:weightSum="4"
+        app:layout_constraintTop_toBottomOf="@id/inputField"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Row 1 -->
-        <Button android:id="@+id/btn7" android:text="7" style="@style/CalcButton"/>
-        <Button android:id="@+id/btn8" android:text="8" style="@style/CalcButton"/>
-        <Button android:id="@+id/btn9" android:text="9" style="@style/CalcButton"/>
-        <Button android:id="@+id/btnDivide" android:text="/" style="@style/CalcButton"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:weightSum="4"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <Button android:id="@+id/btn7" style="@style/CalcButton"
+                android:text="7" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/btn8" style="@style/CalcButton"
+                android:text="8" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/btn9" style="@style/CalcButton"
+                android:text="9" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/btnDivide"
+                style="@style/CalcButton"
+                android:text="÷"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
 
         <!-- Row 2 -->
-        <Button android:id="@+id/btn4" android:text="4" style="@style/CalcButton"/>
-        <Button android:id="@+id/btn5" android:text="5" style="@style/CalcButton"/>
-        <Button android:id="@+id/btn6" android:text="6" style="@style/CalcButton"/>
-        <Button android:id="@+id/btnMultiply" android:text="*" style="@style/CalcButton"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:weightSum="4"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <Button android:id="@+id/btn4" style="@style/CalcButton"
+                android:text="4" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/btn5" style="@style/CalcButton"
+                android:text="5" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/btn6" style="@style/CalcButton"
+                android:text="6" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/btnMultiply" style="@style/CalcButton"
+                android:text="×" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
 
         <!-- Row 3 -->
-        <Button android:id="@+id/btn1" android:text="1" style="@style/CalcButton"/>
-        <Button android:id="@+id/btn2" android:text="2" style="@style/CalcButton"/>
-        <Button android:id="@+id/btn3" android:text="3" style="@style/CalcButton"/>
-        <Button android:id="@+id/btnSubtract" android:text="-" style="@style/CalcButton"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:weightSum="4"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <Button android:id="@+id/btn1" style="@style/CalcButton"
+                android:text="1" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/btn2" style="@style/CalcButton"
+                android:text="2" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/btn3" style="@style/CalcButton"
+                android:text="3" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/btnMinus" style="@style/CalcButton"
+                android:text="−" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
 
         <!-- Row 4 -->
-        <Button android:id="@+id/btn0" android:text="0" style="@style/CalcButton"/>
-        <Button android:id="@+id/btnClear" android:text="C" style="@style/CalcButton"/>
-        <Button android:id="@+id/btnEquals" android:text="=" style="@style/CalcButton"/>
-        <Button android:id="@+id/btnAdd" android:text="+" style="@style/CalcButton"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:weightSum="4"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
 
-    </GridLayout>
+            <Button android:id="@+id/btn0" style="@style/CalcButton"
+                android:text="0" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/btnClear" style="@style/CalcButton"
+                android:text="C" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/btnEqual" style="@style/CalcButton"
+                android:text="=" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/btnPlus" style="@style/CalcButton"
+                android:text="+" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
