@@ -46,7 +46,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- KEYPAD: weighted rows/cols so buttons ALWAYS fill -->
+    <!-- KEYPAD -->
     <LinearLayout
         android:id="@+id/keypad"
         android:layout_width="0dp"
@@ -68,22 +68,42 @@
             android:orientation="horizontal"
             android:baselineAligned="false">
 
-            <Button android:id="@+id/btn7" style="@style/CalcButton"
-                android:text="7" android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <Button android:id="@+id/btn8" style="@style/CalcButton"
-                android:text="8" android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <Button android:id="@+id/btn9" style="@style/CalcButton"
-                android:text="9" android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1"/>
             <Button
-                android:id="@+id/btnDivide"
+                android:id="@+id/btn7"
                 style="@style/CalcButton"
-                android:text="÷"
+                android:text="7"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btn8"
+                style="@style/CalcButton"
+                android:text="8"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btn9"
+                style="@style/CalcButton"
+                android:text="9"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <!-- Divide (PNG icon centered) -->
+            <ImageButton
+                android:id="@+id/btnDivide"
+                style="@style/CalcButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_divide"
+                android:contentDescription="@string/divide"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:padding="0dp" />
         </LinearLayout>
 
         <!-- Row 2 -->
@@ -95,18 +115,42 @@
             android:orientation="horizontal"
             android:baselineAligned="false">
 
-            <Button android:id="@+id/btn4" style="@style/CalcButton"
-                android:text="4" android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <Button android:id="@+id/btn5" style="@style/CalcButton"
-                android:text="5" android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <Button android:id="@+id/btn6" style="@style/CalcButton"
-                android:text="6" android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <Button android:id="@+id/btnMultiply" style="@style/CalcButton"
-                android:text="×" android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/btn4"
+                style="@style/CalcButton"
+                android:text="4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btn5"
+                style="@style/CalcButton"
+                android:text="5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btn6"
+                style="@style/CalcButton"
+                android:text="6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <!-- Multiply (PNG icon centered) -->
+            <ImageButton
+                android:id="@+id/btnMultiply"
+                style="@style/CalcButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_multiply"
+                android:contentDescription="@string/multiply"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:padding="0dp" />
         </LinearLayout>
 
         <!-- Row 3 -->
@@ -118,18 +162,42 @@
             android:orientation="horizontal"
             android:baselineAligned="false">
 
-            <Button android:id="@+id/btn1" style="@style/CalcButton"
-                android:text="1" android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <Button android:id="@+id/btn2" style="@style/CalcButton"
-                android:text="2" android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <Button android:id="@+id/btn3" style="@style/CalcButton"
-                android:text="3" android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <Button android:id="@+id/btnMinus" style="@style/CalcButton"
-                android:text="−" android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/btn1"
+                style="@style/CalcButton"
+                android:text="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btn2"
+                style="@style/CalcButton"
+                android:text="2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btn3"
+                style="@style/CalcButton"
+                android:text="3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <!-- Minus (PNG icon centered) -->
+            <ImageButton
+                android:id="@+id/btnMinus"
+                style="@style/CalcButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_minus"
+                android:contentDescription="@string/minus"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:padding="0dp" />
         </LinearLayout>
 
         <!-- Row 4 -->
@@ -141,18 +209,42 @@
             android:orientation="horizontal"
             android:baselineAligned="false">
 
-            <Button android:id="@+id/btn0" style="@style/CalcButton"
-                android:text="0" android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <Button android:id="@+id/btnClear" style="@style/CalcButton"
-                android:text="C" android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <Button android:id="@+id/btnEqual" style="@style/CalcButton"
-                android:text="=" android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1"/>
-            <Button android:id="@+id/btnPlus" style="@style/CalcButton"
-                android:text="+" android:layout_width="0dp" android:layout_height="match_parent"
-                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/btn0"
+                style="@style/CalcButton"
+                android:text="0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnClear"
+                style="@style/CalcButton"
+                android:text="C"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnEqual"
+                style="@style/CalcButton"
+                android:text="="
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <!-- Plus (PNG icon centered) -->
+            <ImageButton
+                android:id="@+id/btnPlus"
+                style="@style/CalcButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_plus"
+                android:contentDescription="@string/plus"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:padding="0dp" />
         </LinearLayout>
 
     </LinearLayout>

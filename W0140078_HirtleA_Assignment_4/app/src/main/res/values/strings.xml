@@ -1,9 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App -->
     <string name="app_name">Calculator</string>
-    <string name="enter_number">Enter number</string>
-    <string name="app_logo">App Logo</string>
 
-    <!-- Operator content descriptions -->
+    <!-- Display hint -->
+    <string name="enter_number">Enter number</string>
+
+    <!-- Accessibility / content descriptions -->
+    <string name="app_logo">App Logo</string>
     <string name="plus">Plus</string>
     <string name="minus">Minus</string>
     <string name="divide">Divide</string>
