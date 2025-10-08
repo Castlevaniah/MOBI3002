@@ -92,7 +92,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <!-- Divide (PNG icon centered) -->
+            <!-- Used ImageButton for PNG -->
             <ImageButton
                 android:id="@+id/btnDivide"
                 style="@style/CalcButton"
@@ -139,7 +139,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <!-- Multiply (PNG icon centered) -->
+            <!-- Used ImageButton for PNG -->
             <ImageButton
                 android:id="@+id/btnMultiply"
                 style="@style/CalcButton"
@@ -186,7 +186,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <!-- Minus (PNG icon centered) -->
+            <!-- Used ImageButton for PNG -->
             <ImageButton
                 android:id="@+id/btnMinus"
                 style="@style/CalcButton"
@@ -233,7 +233,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <!-- Plus (PNG icon centered) -->
+            <!-- Used ImageButton for PNG -->
             <ImageButton
                 android:id="@+id/btnPlus"
                 style="@style/CalcButton"
