@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnAdd).setOnClickListener(v -> addBallFromUi());
         findViewById(R.id.btnClear).setOnClickListener(v -> clearAll());
 
-        // Assignment: persistence — rebuild balls from DB on app start
+        // Persistence
         for (BallsDbHelper.StoredBall sb : db.getAllBalls()) {
             Log.d("MainActivity", "LoadFromDB: " + sb.name + " ("+sb.x+","+sb.y+") dx="+sb.dx+" dy="+sb.dy+" color="+sb.color);
             bbView.addBall(new Ball(sb.name, sb.color, sb.x, sb.y, sb.dx, sb.dy));

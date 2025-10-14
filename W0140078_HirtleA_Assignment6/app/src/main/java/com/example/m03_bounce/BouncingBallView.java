@@ -9,28 +9,18 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.Random;
 
-// custom View = animation engine. Owns shapes, updates them, draws them, loops via invalidate()
+// custom View: owns and animates shapes, loops via invalidate()
 public class BouncingBallView extends View {
 
-    // all moving shapes live here
     private ArrayList<Ball> balls = new ArrayList<>();
     private ArrayList<Square> squares = new ArrayList<>();
-
-    // used if we ever “nudge” the first ball with a swipe
-    private Ball ball_1;
-
-    private Box box;            // blue background bounds
-    private Rectangle rectTarget; // red target rectangle for scoring
+    private Ball ball_1; // kept for optional swipe nudges
+    private Box box;
+    private Rectangle rectTarget;
     private int score = 0;
-
-    // last touch (kept in case you want to re-enable swipe dynamics later)
-    private float previousX;
-    private float previousY;
-
-    private Random rand = new Random();
-
-    // switch to block swipe-spawning (assignment: one ball at a time via GUI)
-    private boolean allowSwipeSpawn = false;
+    private float previousX, previousY;
+    private final Random rand = new Random();
+    private final boolean allowSwipeSpawn = false; // assignment = GUI-only adds
 
     public BouncingBallView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -39,15 +29,14 @@ public class BouncingBallView extends View {
         setFocusableInTouchMode(true);
     }
 
-    // create+add one ball from the Activity (called after DB insert too)
+    // called from Activity after DB insert / form add
     public void addBall(Ball b) {
-        // remember the first ball so we could nudge it (if we enable that again)
         if (ball_1 == null) ball_1 = b;
         balls.add(b);
         invalidate();
     }
 
-    // clear everything (called by Clear button)
+    // clear DB + screen
     public void clearAll() {
         balls.clear();
         squares.clear();
@@ -57,36 +46,27 @@ public class BouncingBallView extends View {
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        // set the play area to match the current view size
         box.set(0, 0, w, h);
-
-        // center target (just visual + score demo)
         rectTarget = new Rectangle(box.xMax / 2f, box.yMax / 2f, 200, 100, android.graphics.Color.RED);
-
-        // important: do NOT auto-create random balls here (assignment wants deliberate adds)
+        // no random seeding; assignment wants deliberate adds
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        // draw background
         box.draw(canvas);
 
-        // update + draw balls
         for (Ball b : balls) {
             b.draw(canvas);
             b.moveWithCollisionDetection(box);
         }
-
-        // update + draw squares (we’re not adding new ones in this assignment flow)
         for (Square s : squares) {
             s.draw(canvas);
             s.moveWithCollisionDetection(box);
         }
 
-        // score target on top
         rectTarget.draw(canvas);
 
-        // basic scoring: overlapping the target bumps score (not required, just visual)
+        // simple scoring demo
         for (Ball b : balls) {
             if (rectTarget.collidesWith(b)) {
                 score++;
@@ -94,34 +74,29 @@ public class BouncingBallView extends View {
             }
         }
 
-        // keep animation loop alive
-        invalidate();
+        invalidate(); // keep animation running
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        // for assignment we don’t spawn on swipe; we only remember positions (in case needed)
-        float currentX = event.getX();
-        float currentY = event.getY();
-        previousX = currentX;
-        previousY = currentY;
-        return true; // we handled it
+        // we don't spawn on swipe for this assignment
+        previousX = event.getX();
+        previousY = event.getY();
+        return true;
     }
 
-    // old demo: add a random ball (MainActivity button still calls this; you can remove if not allowed)
+    // optional demo: random ball
     public void RussButtonPressed() {
-        int viewWidth = this.getMeasuredWidth();
-        int viewHeight = this.getMeasuredHeight();
+        int w = Math.max(1, getMeasuredWidth());
+        int h = Math.max(1, getMeasuredHeight());
 
-        float x = rand.nextInt(Math.max(1, viewWidth - 100)) + 50;
-        float y = rand.nextInt(Math.max(1, viewHeight - 100)) + 50;
-
+        float x = rand.nextInt(Math.max(1, w - 100)) + 50;
+        float y = rand.nextInt(Math.max(1, h - 100)) + 50;
         float dx = rand.nextInt(21) - 10;
         float dy = rand.nextInt(21) - 10;
         if (dx == 0) dx = 3;
         if (dy == 0) dy = 3;
 
-        // give this a generic name for logs
         addBall(new Ball("Random", getRandomColor(), x, y, dx, dy));
     }
 

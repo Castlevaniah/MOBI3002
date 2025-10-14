@@ -1,37 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- full canvas + glass control panel -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Fullscreen animation view -->
+    <!-- the animation canvas -->
     <com.example.m03_bounce.BouncingBallView
         android:id="@+id/custView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!-- Bottom control panel (card style) -->
+    <!-- bottom panel uses our new glass background -->
     <ScrollView
+        android:id="@+id/panelScroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:fillViewport="true"
-        android:background="@drawable/bg_panel">
+        android:background="@drawable/bg_panel"
+        android:elevation="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="12dp">
+            android:padding="14dp">
 
-            <!-- Row 1: Name / X / Y -->
+            <!-- small header for context -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADD BALL"
+                android:textColor="#EDEBFF"
+                android:textSize="12sp"
+                android:letterSpacing="0.05" />
+
+            <!-- row 1: name, x, y -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3"
-                android:baselineAligned="false"
-                android:layout_marginBottom="8dp">
+                android:layout_marginTop="8dp">
 
+                <!-- name -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -42,20 +54,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Name"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp"/>
+                        android:textColor="#AFAAEF"
+                        android:textSize="11sp"/>
                     <EditText
                         android:id="@+id/etName"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="44dp"
                         android:background="@drawable/bg_input"
-                        android:paddingHorizontal="10dp"
-                        android:textColor="#111111"
-                        android:hint="e.g. RedFast"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="#0D0D12"
+                        android:hint="e.g., Ball"
                         android:textSize="14sp"
                         android:inputType="textPersonName"/>
                 </LinearLayout>
 
+                <!-- x -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -66,20 +79,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="X"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp"/>
+                        android:textColor="#AFAAEF"
+                        android:textSize="11sp"/>
                     <EditText
                         android:id="@+id/etX"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="44dp"
                         android:background="@drawable/bg_input"
-                        android:paddingHorizontal="10dp"
-                        android:textColor="#111111"
-                        android:hint="e.g. 250"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="#0D0D12"
+                        android:hint="e.g., 250"
                         android:textSize="14sp"
                         android:inputType="numberDecimal"/>
                 </LinearLayout>
 
+                <!-- y -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -90,30 +104,30 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Y"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp"/>
+                        android:textColor="#AFAAEF"
+                        android:textSize="11sp"/>
                     <EditText
                         android:id="@+id/etY"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="44dp"
                         android:background="@drawable/bg_input"
-                        android:paddingHorizontal="10dp"
-                        android:textColor="#111111"
-                        android:hint="e.g. 350"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="#0D0D12"
+                        android:hint="e.g., 350"
                         android:textSize="14sp"
                         android:inputType="numberDecimal"/>
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Row 2: dX / dY / Color -->
+            <!-- row 2: dx, dy, color -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3"
-                android:baselineAligned="false"
-                android:layout_marginBottom="10dp">
+                android:layout_marginTop="8dp">
 
+                <!-- dx -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -124,20 +138,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="dX"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp"/>
+                        android:textColor="#AFAAEF"
+                        android:textSize="11sp"/>
                     <EditText
                         android:id="@+id/etDx"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="44dp"
                         android:background="@drawable/bg_input"
-                        android:paddingHorizontal="10dp"
-                        android:textColor="#111111"
-                        android:hint="e.g. 6"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="#0D0D12"
+                        android:hint="e.g., 6"
                         android:textSize="14sp"
                         android:inputType="numberDecimal"/>
                 </LinearLayout>
 
+                <!-- dy -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -148,20 +163,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="dY"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp"/>
+                        android:textColor="#AFAAEF"
+                        android:textSize="11sp"/>
                     <EditText
                         android:id="@+id/etDy"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="44dp"
                         android:background="@drawable/bg_input"
-                        android:paddingHorizontal="10dp"
-                        android:textColor="#111111"
-                        android:hint="e.g. 3"
+                        android:paddingHorizontal="12dp"
+                        android:textColor="#0D0D12"
+                        android:hint="e.g., 3"
                         android:textSize="14sp"
                         android:inputType="numberDecimal"/>
                 </LinearLayout>
 
+                <!-- color -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -172,46 +188,49 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Color"
-                        android:textColor="#FFFFFF"
-                        android:textSize="12sp"/>
+                        android:textColor="#AFAAEF"
+                        android:textSize="11sp"/>
                     <Spinner
                         android:id="@+id/spColor"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="44dp"
                         android:background="@drawable/bg_input"/>
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Actions -->
+            <!-- actions -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
 
                 <Button
                     android:id="@+id/btnClear"
                     android:layout_width="wrap_content"
-                    android:layout_height="44dp"
+                    android:layout_height="48dp"
+                    android:minWidth="96dp"
                     android:background="@drawable/btn_outline"
-                    android:text="Clear"
+                    android:text="CLEAR"
                     android:textAllCaps="false"
-                    android:textColor="#E0E0E0"/>
+                    android:textColor="#D7DBFF"/>
 
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="wrap_content"
-                    android:layout_height="44dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_height="48dp"
+                    android:minWidth="96dp"
+                    android:layout_marginStart="12dp"
                     android:background="@drawable/btn_primary"
-                    android:text="Add"
+                    android:text="ADD"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <!-- Hide the demo button to reduce clutter (turn to visible if you want it) -->
+    <!-- demo button kept hidden to avoid clutter -->
     <Button
         android:id="@+id/myButton"
         android:visibility="gone"
@@ -219,8 +238,7 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="120dp"
-        android:text="Add Ball (Demo)"
+        android:text="Add (Demo)"
         android:background="@drawable/btn_primary"
         android:onClick="onRussButtonClick"/>
 </RelativeLayout>

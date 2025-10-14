@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Material 3 base -->
+    <style name="Base.Theme.M03_Bounce" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- subtle purple as primary so widgets match our neon -->
+        <item name="colorPrimary">#6C6DFF</item>
+        <item name="colorPrimaryContainer">#4C4DFF</item>
+
+        <!-- edge-to-edge: make status bar transparent so canvas reaches top -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <!-- light icons by default (since your canvas is dark-ish at edges) -->
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+
+    <style name="Theme.M03_Bounce" parent="Base.Theme.M03_Bounce" />
+</resources>

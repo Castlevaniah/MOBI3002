@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- secondary button: transparent w/ neon outline -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="#2236C2FF">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="14dp"/>
+            <solid android:color="#1A162A"/>
+            <stroke android:width="2dp" android:color="#8BA0FF"/>
+            <padding android:left="18dp" android:top="10dp" android:right="18dp" android:bottom="10dp"/>
+        </shape>
+    </item>
+</ripple>

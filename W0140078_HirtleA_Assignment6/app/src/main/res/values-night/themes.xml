@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.M03_Bounce" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- same accent in dark mode -->
+        <item name="colorPrimary">#6C6DFF</item>
+        <item name="colorPrimaryContainer">#4C4DFF</item>
+
+        <!-- edge-to-edge in dark -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+</resources>

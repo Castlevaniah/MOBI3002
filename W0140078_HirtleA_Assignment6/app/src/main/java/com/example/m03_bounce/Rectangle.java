@@ -38,11 +38,5 @@ public class Rectangle {
                         ball.x + ball.radius, ball.y + ball.radius));
     }
 
-    // leaving this in case squares are used (not required for marks)
-    public boolean collidesWith(Square square) {
-        return RectF.intersects(
-                bounds,
-                new RectF(square.x - square.size / 2, square.y - square.size / 2,
-                        square.x + square.size / 2, square.y + square.size / 2));
-    }
+
 }
