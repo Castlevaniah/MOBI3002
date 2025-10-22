@@ -9,40 +9,47 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-// Activity = glue between the panel (UI), DB, custom View, and the Gravity sensor
+// Activity = panel/UI + DB + custom View + Gravity sensor
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
-    // references to my custom view + DB
+    private static final String TAG = "MainActivity"; // simple Logcat tag
+
+    // view + db
     private BouncingBallView bbView;
     private BallsDbHelper db;
 
-    // inputs from the panel
+    // panel fields
     private EditText etName, etX, etY, etDx, etDy;
     private Spinner spColor;
     private int[] colorInts;
 
     // sensors
     private SensorManager sensorManager;
-    private Sensor gravitySensor;    // best
+    private Sensor gravitySensor;    // preferred
     private Sensor accelSensor;      // fallback
+
+    // simple throttled sensor log
+    private long lastSensorLogNs = 0;
+    private static final long SENSOR_LOG_INTERVAL_NS = 250_000_000L; // 0.25s
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // show the layout (canvas + control panel)
         setContentView(R.layout.activity_main);
 
-        // custom view reference
-        bbView = findViewById(R.id.custView);
+        // --- basic startup log ---
+        Log.d(TAG, "onCreate: app starting (pid=" + android.os.Process.myPid() + ")");
 
-        // DB helper
+        // hook up view + db
+        bbView = findViewById(R.id.custView);
         db = new BallsDbHelper(this);
 
-        // hook up panel fields
+        // hook up panel inputs
         etName = findViewById(R.id.etName);
         etX    = findViewById(R.id.etX);
         etY    = findViewById(R.id.etY);
@@ -57,79 +64,98 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spColor.setAdapter(adapter);
 
-        // buttons
-        findViewById(R.id.btnAdd).setOnClickListener(v -> addBallFromUi());
-        findViewById(R.id.btnClear).setOnClickListener(v -> clearAll());
+        // buttons (log clicks)
+        findViewById(R.id.btnAdd).setOnClickListener(v -> {
+            Log.d(TAG, "btnAdd: clicked");
+            addBallFromUi();
+        });
+        findViewById(R.id.btnClear).setOnClickListener(v -> {
+            Log.d(TAG, "btnClear: clicked");
+            clearAll();
+        });
 
-        // load persisted balls
+        // load any saved balls (log each load)
         for (BallsDbHelper.StoredBall sb : db.getAllBalls()) {
+            Log.d(TAG, "loadFromDb: name=" + sb.name + " x=" + sb.x + " y=" + sb.y + " dx=" + sb.dx + " dy=" + sb.dy + " color=" + sb.color);
             bbView.addBall(new Ball(sb.name, sb.color, sb.x, sb.y, sb.dx, sb.dy));
         }
 
-        // sensor setup
+        // sensor setup + availability log
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
         accelSensor   = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        Log.d(TAG, "sensors: gravity=" + (gravitySensor != null) + " accel=" + (accelSensor != null));
     }
 
-    // read form -> insert into DB -> add to view
+    // read form -> insert into DB -> add to view (log exactly what was added)
     private void addBallFromUi() {
-        String name = textOr(etName, "Ball"); // safe text
-        float x  = floatOr(etX,  200f);       // safe numbers
+        String name = textOr(etName);
+        float x  = floatOr(etX,  200f);
         float y  = floatOr(etY,  200f);
         float dx = floatOr(etDx,   4f);
         float dy = floatOr(etDy,   3f);
         int color = colorInts[spColor.getSelectedItemPosition()];
 
-        db.insertBall(name, x, y, dx, dy, color);             // save one row
-        bbView.addBall(new Ball(name, color, x, y, dx, dy));  // draw it
+        Log.d(TAG, "addBall: name=" + name + " x=" + x + " y=" + y + " dx=" + dx + " dy=" + dy + " color=" + color);
+
+        db.insertBall(name, x, y, dx, dy, color);
+        bbView.addBall(new Ball(name, color, x, y, dx, dy));
     }
 
-    // wipe DB + screen
+    // clear DB + view (log rows deleted)
     private void clearAll() {
-        db.deleteAll();
+        int rows = db.deleteAll();
+        Log.d(TAG, "clearAll: dbRowsDeleted=" + rows);
         bbView.clearAll();
     }
 
-    // helpers to avoid crashes on blank input
-    private static String textOr(EditText e, String def) {
+    // safe helpers
+    private static String textOr(EditText e) {
         String s = e.getText() == null ? "" : e.getText().toString().trim();
-        return s.isEmpty() ? def : s;
+        return s.isEmpty() ? "Ball" : s;
     }
     private static float floatOr(EditText e, float def) {
         try { return Float.parseFloat(e.getText().toString().trim()); }
         catch (Exception ex) { return def; }
     }
 
-    // lifecycle: register sensor listener when visible
+    // register sensor + log which one
     @Override
     protected void onResume() {
         super.onResume();
         if (gravitySensor != null) {
             sensorManager.registerListener(this, gravitySensor, SensorManager.SENSOR_DELAY_GAME);
+            Log.d(TAG, "onResume: registered GRAVITY");
         } else if (accelSensor != null) {
             sensorManager.registerListener(this, accelSensor, SensorManager.SENSOR_DELAY_GAME);
+            Log.d(TAG, "onResume: registered ACCELEROMETER (fallback)");
+        } else {
+            Log.w(TAG, "onResume: no gravity/accelerometer available");
         }
     }
 
-    // lifecycle: unregister when backgrounded
+    // unregister + log
     @Override
     protected void onPause() {
         super.onPause();
         sensorManager.unregisterListener(this);
+        Log.d(TAG, "onPause: unregistered sensors");
     }
 
-    // sensor callback: send gravity to the view
+    // gravity values -> view; also log them (throttled)
     @Override
     public void onSensorChanged(SensorEvent event) {
         float gx, gy;
-        if (event.sensor.getType() == Sensor.TYPE_GRAVITY) {
-            gx = event.values[0];  // m/s^2
-            gy = event.values[1];
-        } else { // accelerometer fallback
-            gx = event.values[0];
-            gy = event.values[1];
+        gx = event.values[0];
+        gy = event.values[1];
+
+        // throttle logs to ~4 Hz so Logcat stays readable
+        long now = System.nanoTime();
+        if (now - lastSensorLogNs >= SENSOR_LOG_INTERVAL_NS) {
+            lastSensorLogNs = now;
+            Log.d(TAG, "sensor: gx=" + gx + " gy=" + gy + " type=" + event.sensor.getType());
         }
+
         bbView.setGravity(-gx, gy); // flip X so tilt feels natural
     }
 
