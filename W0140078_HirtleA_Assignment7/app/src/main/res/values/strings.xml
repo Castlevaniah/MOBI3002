@@ -1,0 +1,4 @@
+<resources>
+    <!-- app name shown under the launcher icon -->
+    <string name="app_name">Gravity Ball</string>
+</resources>

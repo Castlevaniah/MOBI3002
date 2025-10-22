@@ -5,13 +5,12 @@
     android:layout_height="match_parent">
 
     <!-- the animation canvas -->
-
-    <!-- bottom panel uses our new glass background -->
     <com.example.m03_bounce.BouncingBallView
         android:id="@+id/custView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <!-- bottom panel uses our glass background -->
     <ScrollView
         android:id="@+id/panelScroll"
         android:layout_width="match_parent"
@@ -230,17 +229,5 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <!-- demo button kept hidden to avoid clutter -->
-    <Button
-        android:id="@+id/myButton"
-        android:visibility="gone"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Add (Demo)"
-        android:background="@drawable/btn_primary"
-        android:onClick="onRussButtonClick"/>
 
 </RelativeLayout>
