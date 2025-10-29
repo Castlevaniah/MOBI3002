@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Deep blue base -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:startColor="#0A1B2E"
+                android:endColor="#0C2642"
+                android:angle="90" />
+        </shape>
+    </item>
+
+    <!-- Soft radial glow in the middle -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="600dp"
+                android:centerX="50%"
+                android:centerY="40%"
+                android:startColor="#3320B8FF"
+                android:endColor="#001B2F4A" />
+        </shape>
+    </item>
+
+</layer-list>
