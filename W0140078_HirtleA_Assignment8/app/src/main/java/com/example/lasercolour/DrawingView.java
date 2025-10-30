@@ -7,6 +7,7 @@ import android.graphics.Canvas;             // where we draw
 import android.graphics.Paint;              // brush settings (color, width, style)
 import android.graphics.Path;               // path = the line we draw as the finger moves
 import android.util.AttributeSet;           // XML attributes for Views
+import android.util.Log;                    // <-- Logcat
 import android.view.MotionEvent;            // touch events (down/move/up)
 import android.view.View;                   // base class for custom views
 
@@ -17,8 +18,9 @@ import java.util.List;
 
 public class DrawingView extends View {
 
+    private static final String TAG = "LaserColour";
+
     // One finished stroke: path + color + width.
-    // We keep these so drawings stay on screen after finger lifts.
     private static class Stroke {
         final Path path;    // the actual shape/line
         final int color;    // ARGB color used
@@ -39,6 +41,10 @@ public class DrawingView extends View {
     private final float glowRadius = 24f;   // how soft/wide the blur is
     private final float glowScale  = 2.2f;  // glow line is thicker than the core line
 
+    // Throttle for MOVE logs so Logcat stays readable
+    private long lastMoveLogTime = 0L;
+    private static final long MOVE_LOG_INTERVAL_MS = 150L;
+
     // --- Required constructors for custom Views (used by code and XML) ---
     public DrawingView(Context context) {
         super(context); init(); // called when created in code
@@ -55,6 +61,7 @@ public class DrawingView extends View {
         setLayerType(LAYER_TYPE_SOFTWARE, null);
         // Tell View we *will* draw (avoid some optimizations)
         setWillNotDraw(false);
+        Log.d(TAG, "DrawingView init: software layer ON, ready to draw");
     }
 
     // Create the "core" paint (the sharp inner line)
@@ -105,42 +112,47 @@ public class DrawingView extends View {
             canvas.drawPath(currentPath, makeGlowPaint(currentColor, currentStrokeWidth));
             canvas.drawPath(currentPath, makeCorePaint(currentColor, currentStrokeWidth));
         }
+
+        // Verbose but useful: how many strokes are on screen
+        Log.v(TAG, "onDraw: strokes=" + strokes.size() + (currentPath != null ? " + inProgress" : ""));
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        // Get touch coordinates
         float x = e.getX();
         float y = e.getY();
 
-        // Handle touch actions
         switch (e.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                // Start a new path where the finger touched
                 currentPath = new Path();
                 currentPath.moveTo(x, y);
-                invalidate();      // request redraw
-                return true;       // we handled it
+                Log.d(TAG, "Touch DOWN at x=" + (int)x + ", y=" + (int)y + " (start path)");
+                invalidate();
+                return true;
 
             case MotionEvent.ACTION_MOVE:
-                // Extend the path as the finger moves
                 if (currentPath != null) currentPath.lineTo(x, y);
-                invalidate();      // update the screen
+                long now = System.currentTimeMillis();
+                if (now - lastMoveLogTime >= MOVE_LOG_INTERVAL_MS) {
+                    Log.v(TAG, "Touch MOVE at x=" + (int)x + ", y=" + (int)y);
+                    lastMoveLogTime = now;
+                }
+                invalidate();
                 return true;
 
             case MotionEvent.ACTION_UP:
-                // Finger lifted: finalize this stroke and store it
                 if (currentPath != null) {
                     Path done = new Path(currentPath); // copy so we don't mutate later
                     strokes.add(new Stroke(done, currentColor, currentStrokeWidth));
-                    currentPath = null;                // reset for the next stroke
+                    currentPath = null;
+                    Log.d(TAG, "Touch UP: stroke committed. Total strokes=" + strokes.size());
                 }
-                invalidate();      // redraw with the new stroke saved
+                invalidate();
                 return true;
 
             default:
-                return false;      // not handling other actions
+                return false;
         }
     }
 
@@ -148,18 +160,21 @@ public class DrawingView extends View {
     public void clear() {
         strokes.clear();   // remove stored strokes
         currentPath = null;
+        Log.i(TAG, "clear(): all strokes removed");
         invalidate();      // refresh the view
     }
 
     // Change brush color for future strokes
     public void setStrokeColor(int color) {
         this.currentColor = color;
+        Log.i(TAG, "setStrokeColor(): color=0x" + Integer.toHexString(color).toUpperCase());
         invalidate(); // if drawing now, show the new color on the live path
     }
 
-    // Change brush width for future strokes
+    // Change brush width for future strokes (if you wire a size control later)
     public void setStrokeWidth(float width) {
         this.currentStrokeWidth = width;
-        invalidate(); // refresh if needed
+        Log.i(TAG, "setStrokeWidth(): width=" + width);
+        invalidate();
     }
 }
