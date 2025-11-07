@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Dark base -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:startColor="#0A1B2E"
+                android:endColor="#0C2642"
+                android:angle="90"/>
+        </shape>
+    </item>
+
+    <!-- Thin top highlight -->
+    <item android:height="2dp" android:gravity="top">
+        <shape android:shape="rectangle">
+            <solid android:color="#33FFFFFF"/>
+        </shape>
+    </item>
+
+    <!-- Neon inner glow band -->
+    <item android:top="8dp" android:bottom="8dp" android:left="-16dp" android:right="-16dp">
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="radial"
+                android:centerX="50%"
+                android:centerY="120%"
+                android:gradientRadius="500dp"
+                android:startColor="#5520B8FF"
+                android:endColor="#00000000"/>
+        </shape>
+    </item>
+
+    <!-- Bottom edge glow -->
+    <item android:height="6dp" android:gravity="bottom">
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="90"
+                android:startColor="#5520B8FF"
+                android:endColor="#0020B8FF"/>
+        </shape>
+    </item>
+
+</layer-list>

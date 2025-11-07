@@ -1,0 +1,12 @@
+<resources>
+    <!-- Neon title: bright, spaced, soft shadow -->
+    <style name="NeonToolbarTitle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">#E6FFFFFF</item>
+        <item name="android:letterSpacing">0.08</item>
+        <!-- subtle glow -->
+        <item name="android:shadowColor">#8020B8FF</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">6</item>
+    </style>
+</resources>
